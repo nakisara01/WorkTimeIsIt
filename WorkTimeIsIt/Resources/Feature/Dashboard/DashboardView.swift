@@ -155,7 +155,7 @@ struct DashboardView: View {
             // 체크인 시간 카드
             infoCard(
                 icon: "arrow.right.circle",
-                title: "체크인",
+                title: String(localized: "dashboard.checkIn"),
                 value: viewModel.formattedStartTime,
                 accentColor: DashboardColors.accent
             )
@@ -163,7 +163,7 @@ struct DashboardView: View {
             // 점심 시간 카드
             infoCard(
                 icon: "fork.knife",
-                title: "점심",
+                title: String(localized: "dashboard.lunch"),
                 value: viewModel.formattedLunchTime,
                 accentColor: DashboardColors.warning
             )
@@ -171,7 +171,7 @@ struct DashboardView: View {
             // 퇴근 예정 카드
             infoCard(
                 icon: "arrow.left.circle",
-                title: "퇴근",
+                title: String(localized: "dashboard.clockOut"),
                 value: viewModel.formattedEndTime,
                 accentColor: DashboardColors.success
             )
@@ -217,7 +217,7 @@ struct DashboardView: View {
         Button {
             viewModel.clockOut()
         } label: {
-            Text("🎵 Clock Out")
+            Text(String(localized: "dashboard.clockOutButton"))
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
@@ -249,20 +249,20 @@ struct DashboardView: View {
                 .font(.system(size: 52))
 
             VStack(spacing: 4) {
-                Text("수고하셨습니다!")
+                Text(String(localized: "dashboard.completed.title"))
                     .font(.system(size: 20, weight: .bold))
                     .foregroundStyle(DashboardColors.primaryText)
 
-                Text("오늘도 좋은 하루 되세요")
+                Text(String(localized: "dashboard.completed.subtitle"))
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(DashboardColors.secondaryText)
             }
 
             // 업무 요약
             VStack(spacing: 8) {
-                summaryRow(icon: "arrow.right.circle", label: "체크인", value: viewModel.formattedStartTime)
-                summaryRow(icon: "clock", label: "근무 시간", value: viewModel.workHoursString)
-                summaryRow(icon: "arrow.left.circle", label: "퇴근", value: viewModel.formattedEndTime)
+                summaryRow(icon: "arrow.right.circle", label: String(localized: "dashboard.summary.checkIn"), value: viewModel.formattedStartTime)
+                summaryRow(icon: "clock", label: String(localized: "dashboard.summary.workHours"), value: viewModel.workHoursString)
+                summaryRow(icon: "arrow.left.circle", label: String(localized: "dashboard.summary.clockOut"), value: viewModel.formattedEndTime)
             }
             .padding(12)
             .background(
@@ -303,7 +303,7 @@ struct DashboardView: View {
             Button {
                 navigate(.timeSettings)
             } label: {
-                Text("시간 설정")
+                Text(String(localized: "dashboard.timeSettings"))
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(DashboardColors.accent)
             }

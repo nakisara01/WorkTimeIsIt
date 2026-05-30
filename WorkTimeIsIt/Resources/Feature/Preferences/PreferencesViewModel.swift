@@ -32,12 +32,14 @@ final class PreferencesViewModel {
 
     /// Available sprite options for the menu bar.
     /// Index order matches StatusItemSpriteRenderer's sprite list.
-    let spriteOptions: [(name: String, index: Int)] = [
-        ("광부", 0),
-        ("러너", 1),
-        ("로켓", 2),
-        ("서퍼", 3)
-    ]
+    var spriteOptions: [(name: String, index: Int)] {
+        [
+            (String(localized: "sprite.miner"), 0),
+            (String(localized: "sprite.runner"), 1),
+            (String(localized: "sprite.rocket"), 2),
+            (String(localized: "sprite.surfer"), 3)
+        ]
+    }
 
     // MARK: - Initialization
 

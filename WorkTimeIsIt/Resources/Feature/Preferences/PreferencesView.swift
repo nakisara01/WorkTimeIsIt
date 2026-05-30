@@ -42,7 +42,7 @@ struct PreferencesView: View {
     private var headerSection: some View {
         ZStack {
             // Title centered
-            Text("Preferences")
+            Text(String(localized: "preferences.title"))
                 .font(AppFonts.title())
                 .foregroundColor(AppColors.primaryText)
 
@@ -54,7 +54,7 @@ struct PreferencesView: View {
                     HStack(spacing: AppSpacing.xs) {
                         Image(systemName: "chevron.left")
                             .font(.caption)
-                        Text("돌아가기")
+                        Text(String(localized: "preferences.back"))
                             .font(AppFonts.caption())
                     }
                     .foregroundColor(AppColors.secondaryText)
@@ -77,7 +77,7 @@ struct PreferencesView: View {
                 Image(systemName: "menubar.rectangle")
                     .font(AppFonts.caption())
                     .foregroundColor(AppColors.accent)
-                Text("메뉴바 표시 모드")
+                Text(String(localized: "preferences.displayMode.title"))
                     .font(AppFonts.body())
                     .fontWeight(.medium)
                     .foregroundColor(AppColors.primaryText)
@@ -87,7 +87,7 @@ struct PreferencesView: View {
             // Visual indicator of current mode
             HStack {
                 displayModeOption(
-                    title: "남은 시간",
+                    title: String(localized: "preferences.displayMode.remaining"),
                     example: "3h 24m",
                     icon: "timer",
                     isSelected: viewModel.displayMode == .remainingTime
@@ -96,7 +96,7 @@ struct PreferencesView: View {
                 }
 
                 displayModeOption(
-                    title: "퇴근 시간",
+                    title: String(localized: "preferences.displayMode.endTime"),
                     example: "06:00 PM",
                     icon: "clock",
                     isSelected: viewModel.displayMode == .endTime
@@ -167,13 +167,13 @@ struct PreferencesView: View {
                 Image(systemName: "person.fill")
                     .font(AppFonts.caption())
                     .foregroundColor(AppColors.accent)
-                Text("아이콘 설정")
+                Text(String(localized: "preferences.icon.title"))
                     .font(AppFonts.body())
                     .fontWeight(.medium)
                     .foregroundColor(AppColors.primaryText)
             }
 
-            Text("메뉴바에 표시할 아이콘을 선택하세요")
+            Text(String(localized: "preferences.icon.description"))
                 .font(AppFonts.small())
                 .foregroundColor(AppColors.secondaryText)
 

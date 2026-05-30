@@ -24,9 +24,9 @@ enum DisplayMode: String, CaseIterable, Codable {
     var displayName: String {
         switch self {
         case .remainingTime:
-            return "남은 시간"
+            return String(localized: "displayMode.remainingTime")
         case .endTime:
-            return "퇴근 시간"
+            return String(localized: "displayMode.endTime")
         }
     }
     
@@ -34,9 +34,9 @@ enum DisplayMode: String, CaseIterable, Codable {
     var description: String {
         switch self {
         case .remainingTime:
-            return "퇴근까지 남은 시간을 표시합니다"
+            return String(localized: "displayMode.remainingDesc")
         case .endTime:
-            return "퇴근 시간을 표시합니다"
+            return String(localized: "displayMode.endTimeDesc")
         }
     }
 }

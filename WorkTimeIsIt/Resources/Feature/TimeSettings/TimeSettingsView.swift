@@ -54,7 +54,7 @@ struct TimeSettingsView: View {
     private var headerSection: some View {
         ZStack {
             // Title centered
-            Text("시간 설정")
+            Text(String(localized: "timeSettings.title"))
                 .font(AppFonts.title())
                 .foregroundColor(AppColors.primaryText)
 
@@ -66,7 +66,7 @@ struct TimeSettingsView: View {
                     HStack(spacing: AppSpacing.xs) {
                         Image(systemName: "chevron.left")
                             .font(.caption)
-                        Text("돌아가기")
+                        Text(String(localized: "timeSettings.back"))
                             .font(AppFonts.caption())
                     }
                     .foregroundColor(AppColors.secondaryText)
@@ -88,7 +88,7 @@ struct TimeSettingsView: View {
                 .font(AppFonts.caption())
                 .foregroundColor(AppColors.accent)
 
-            Text("근무 시간을 설정하면 퇴근까지 남은 시간을 정확하게 계산할 수 있습니다.")
+            Text(String(localized: "timeSettings.info"))
                 .font(AppFonts.small())
                 .foregroundColor(AppColors.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
@@ -110,13 +110,13 @@ struct TimeSettingsView: View {
     private var workHoursSection: some View {
         VStack(spacing: AppSpacing.md) {
             TimeInputField(
-                label: "출근시간 (근무시작시간)",
+                label: String(localized: "timeSettings.startTime"),
                 selection: $viewModel.startTime
             )
 
             // 총 업무시간 입력
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Text("총 업무시간")
+                Text(String(localized: "timeSettings.totalWorkHours"))
                     .font(AppFonts.caption())
                     .foregroundColor(AppColors.secondaryText)
 
@@ -150,7 +150,7 @@ struct TimeSettingsView: View {
 
             // 퇴근 예정 시간 (자동 계산, 읽기 전용)
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Text("퇴근 예정 시간 (자동 계산)")
+                Text(String(localized: "timeSettings.endTime"))
                     .font(AppFonts.caption())
                     .foregroundColor(AppColors.secondaryText)
 
@@ -193,26 +193,26 @@ struct TimeSettingsView: View {
                 Image(systemName: "moon.fill")
                     .font(AppFonts.caption())
                     .foregroundColor(AppColors.accent)
-                Text("야근 설정")
+                Text(String(localized: "timeSettings.overtime.title"))
                     .font(AppFonts.body())
                     .fontWeight(.medium)
                     .foregroundColor(AppColors.primaryText)
             }
 
             ToggleRow(
-                label: "야근 모드 활성화",
-                description: "야근 시 추가 근무 시간을 설정합니다",
+                label: String(localized: "timeSettings.overtime.enable"),
+                description: String(localized: "timeSettings.overtime.description"),
                 isOn: $viewModel.overtimeEnabled
             )
 
             if viewModel.overtimeEnabled {
                 VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                    Text("추가 근무 시간")
+                    Text(String(localized: "timeSettings.overtime.hours"))
                         .font(AppFonts.caption())
                         .foregroundColor(AppColors.secondaryText)
 
                     HStack {
-                        Text("\(viewModel.overtimeHours, specifier: "%.1f") 시간")
+                        Text(String(format: String(localized: "format.overtimeHours"), viewModel.overtimeHours))
                             .font(AppFonts.body())
                             .foregroundColor(AppColors.primaryText)
                             .monospacedDigit()
@@ -254,27 +254,27 @@ struct TimeSettingsView: View {
                 Image(systemName: "fork.knife")
                     .font(AppFonts.caption())
                     .foregroundColor(AppColors.accent)
-                Text("점심시간 설정")
+                Text(String(localized: "timeSettings.lunch.title"))
                     .font(AppFonts.body())
                     .fontWeight(.medium)
                     .foregroundColor(AppColors.primaryText)
             }
 
             ToggleRow(
-                label: "점심시간 제외",
-                description: "근무 시간에서 점심시간을 제외합니다",
+                label: String(localized: "timeSettings.lunch.exclude"),
+                description: String(localized: "timeSettings.lunch.description"),
                 isOn: $viewModel.lunchBreakEnabled
             )
 
             if viewModel.lunchBreakEnabled {
                 VStack(spacing: AppSpacing.md) {
                     TimeInputField(
-                        label: "점심시간 시작",
+                        label: String(localized: "timeSettings.lunch.start"),
                         selection: $viewModel.lunchStartTime
                     )
 
                     TimeInputField(
-                        label: "점심시간 종료",
+                        label: String(localized: "timeSettings.lunch.end"),
                         selection: $viewModel.lunchEndTime
                     )
                 }
@@ -293,7 +293,7 @@ struct TimeSettingsView: View {
 
     private var saveButton: some View {
         VStack(spacing: AppSpacing.sm) {
-            PrimaryButton(title: "💾 시간 설정하기") {
+            PrimaryButton(title: String(localized: "timeSettings.save")) {
                 viewModel.save()
             }
 
@@ -301,7 +301,7 @@ struct TimeSettingsView: View {
                 HStack(spacing: AppSpacing.xs) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.green)
-                    Text("설정이 저장되었습니다!")
+                    Text(String(localized: "timeSettings.saved"))
                         .font(AppFonts.small())
                         .foregroundColor(.green)
                 }
@@ -314,7 +314,7 @@ struct TimeSettingsView: View {
     // MARK: - Footer
 
     private var footerText: some View {
-        Text("설정한 시간은 자동으로 메뉴바에 반영됩니다.\n언제든지 변경할 수 있습니다.")
+        Text(String(localized: "timeSettings.footer"))
             .font(AppFonts.small())
             .foregroundColor(AppColors.secondaryText)
             .multilineTextAlignment(.center)

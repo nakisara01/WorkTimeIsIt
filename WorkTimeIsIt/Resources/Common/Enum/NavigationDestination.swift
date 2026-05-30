@@ -27,11 +27,11 @@ enum NavigationDestination: Hashable {
     var title: String {
         switch self {
         case .dashboard:
-            return "대시보드"
+            return String(localized: "nav.dashboard")
         case .timeSettings:
-            return "시간 설정"
+            return String(localized: "nav.timeSettings")
         case .preferences:
-            return "환경설정"
+            return String(localized: "nav.preferences")
         }
     }
     

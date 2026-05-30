@@ -54,9 +54,9 @@ final class TimeSettingsViewModel {
         let hours = Int(totalWorkHours)
         let minutes = Int((totalWorkHours - Double(hours)) * 60)
         if minutes == 0 {
-            return "\(hours)시간"
+            return String(format: String(localized: "format.hours"), hours)
         }
-        return "\(hours)시간 \(minutes)분"
+        return String(format: String(localized: "format.hoursMinutes"), hours, minutes)
     }
 
     /// 시간 포맷터

@@ -17,7 +17,7 @@ enum Constants {
     static let appName = "WorkTimeIsIt"
     
     /// 앱 표시 이름 (한국어)
-    static let appDisplayName = "퇴근까지"
+    static let appDisplayName = String(localized: "app.displayName")
     
     /// 앱 버전 (Bundle에서 자동 읽기, 실패 시 기본값)
     static let appVersion: String = {

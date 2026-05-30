@@ -62,14 +62,13 @@ final class DashboardViewModel {
         if timeManager.lunchBreakEnabled {
             return "\(Self.timeFormatter.string(from: timeManager.lunchStartTime)) - \(Self.timeFormatter.string(from: timeManager.lunchEndTime))"
         }
-        return "없음"
+        return String(localized: "dashboard.noLunch")
     }
 
     /// Today's date formatted for display card
     var todayDateString: String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "M월 d일 EEEE"
+        formatter.dateStyle = .long
         return formatter.string(from: Date())
     }
 
@@ -87,11 +86,11 @@ final class DashboardViewModel {
     /// Status label text based on working state
     var statusLabel: String {
         if isCompleted {
-            return "🎉 수고하셨습니다!"
+            return String(localized: "dashboard.status.completed")
         } else if isWorking {
-            return "퇴근까지 남은 시간"
+            return String(localized: "dashboard.status.working")
         } else {
-            return "오늘 근무가 종료되었습니다"
+            return String(localized: "dashboard.status.ended")
         }
     }
 
