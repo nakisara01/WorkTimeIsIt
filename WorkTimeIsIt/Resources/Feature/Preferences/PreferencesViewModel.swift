@@ -9,19 +9,19 @@ import Foundation
 
 /// ViewModel managing preferences state and persistence.
 /// Uses @Observable macro for modern SwiftUI state management.
+///
+/// NOTE: `@Observable`이 `didSet` 옵저버를 안정적으로 보존하지 못할 수 있으므로,
+/// 프로퍼티 변경 시 명시적으로 UserDefaultsManager에 저장합니다.
+@MainActor
 @Observable
 final class PreferencesViewModel {
     // MARK: - Preferences State
 
     /// 메뉴바 표시 모드 (남은 시간 vs 퇴근 시간)
-    var displayMode: DisplayMode {
-        didSet { autoSave() }
-    }
+    var displayMode: DisplayMode
 
     /// 선택된 스프라이트 아이콘 인덱스 (0-3)
-    var selectedSpriteIndex: Int {
-        didSet { autoSave() }
-    }
+    var selectedSpriteIndex: Int
 
     // MARK: - Navigation
 
@@ -42,12 +42,10 @@ final class PreferencesViewModel {
     // MARK: - Initialization
 
     init(navigate: ((NavigationDestination) -> Void)? = nil) {
-        let defaults = PreferencesData.default
-        self.displayMode = defaults.displayMode
-        self.selectedSpriteIndex = defaults.selectedSpriteIndex
+        let manager = UserDefaultsManager.shared
+        self.displayMode = manager.displayMode
+        self.selectedSpriteIndex = manager.selectedSpriteIndex
         self.navigate = navigate
-
-        load()
     }
 
     // MARK: - Computed Properties
@@ -55,31 +53,22 @@ final class PreferencesViewModel {
     /// Whether the display mode shows remaining time.
     var showsRemainingTime: Bool {
         get { displayMode == .remainingTime }
-        set { displayMode = newValue ? .remainingTime : .endTime }
+        set { setDisplayMode(newValue ? .remainingTime : .endTime) }
     }
 
-    // MARK: - Persistence
+    // MARK: - Actions
 
-    /// Loads saved preferences from UserDefaultsManager.
-    @MainActor
-    func load() {
-        let manager = UserDefaultsManager.shared
-        displayMode = manager.displayMode
-        selectedSpriteIndex = manager.selectedSpriteIndex
+    /// 메뉴바 표시 모드를 변경하고 저장합니다.
+    func setDisplayMode(_ mode: DisplayMode) {
+        displayMode = mode
+        UserDefaultsManager.shared.displayMode = mode
     }
 
-    /// Saves the current preferences to UserDefaultsManager immediately.
-    @MainActor
-    private func autoSave() {
-        let manager = UserDefaultsManager.shared
-        manager.displayMode = displayMode
-        manager.selectedSpriteIndex = selectedSpriteIndex
-    }
-
-    /// Selects a sprite at the given index.
+    /// Selects a sprite at the given index and saves to UserDefaultsManager.
     func selectSprite(at index: Int) {
         guard index >= 0 && index < spriteOptions.count else { return }
         selectedSpriteIndex = index
+        UserDefaultsManager.shared.selectedSpriteIndex = index
     }
 
     /// Navigates back to the dashboard.

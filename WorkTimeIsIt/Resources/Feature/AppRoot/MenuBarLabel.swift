@@ -18,6 +18,7 @@ import SwiftUI
 struct MenuBarLabel: View {
     let timeManager: TimeManager
     let spriteRenderer: StatusItemSpriteRenderer
+    let settingsManager: UserDefaultsManager
 
     /// Current animation frame index (0-24), advanced by timer.
     @State private var beat: Int = 0
@@ -76,15 +77,14 @@ struct MenuBarLabel: View {
     }
 
     /// Updates the current frame image from the renderer.
+    /// Reads settingsManager.selectedSpriteIndex directly to ensure
+    /// the icon always reflects the latest user selection.
     private func updateFrame() {
-        let spriteIndex = UserDefaultsManager.shared.selectedSpriteIndex
-        currentFrame = spriteRenderer.frame(forSpriteIndex: spriteIndex, beat: beat)
+        currentFrame = spriteRenderer.frame(forSpriteIndex: settingsManager.selectedSpriteIndex, beat: beat)
     }
 
     private var displayText: String {
-        let settings = UserDefaultsManager.shared
-
-        switch settings.displayMode {
+        switch settingsManager.displayMode {
         case .remainingTime:
             return formattedRemainingTime
         case .endTime:

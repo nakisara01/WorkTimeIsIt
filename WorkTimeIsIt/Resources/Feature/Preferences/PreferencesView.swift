@@ -92,7 +92,7 @@ struct PreferencesView: View {
                     icon: "timer",
                     isSelected: viewModel.displayMode == .remainingTime
                 ) {
-                    viewModel.displayMode = .remainingTime
+                    viewModel.setDisplayMode(.remainingTime)
                 }
 
                 displayModeOption(
@@ -101,7 +101,7 @@ struct PreferencesView: View {
                     icon: "clock",
                     isSelected: viewModel.displayMode == .endTime
                 ) {
-                    viewModel.displayMode = .endTime
+                    viewModel.setDisplayMode(.endTime)
                 }
             }
         }

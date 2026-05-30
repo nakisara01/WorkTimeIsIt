@@ -19,7 +19,7 @@ struct WorkTimeIsItApp: App {
                 .environment(timeManager)
                 .environment(settingsManager)
         } label: {
-            MenuBarLabel(timeManager: timeManager, spriteRenderer: spriteRenderer)
+            MenuBarLabel(timeManager: timeManager, spriteRenderer: spriteRenderer, settingsManager: settingsManager)
         }
         .menuBarExtraStyle(.window)
     }
