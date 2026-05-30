@@ -18,11 +18,6 @@ final class PreferencesViewModel {
         didSet { autoSave() }
     }
 
-    /// Countdown 표시 스타일 (상세 표시 여부)
-    var countdownStyle: Bool {
-        didSet { autoSave() }
-    }
-
     /// 선택된 스프라이트 아이콘 인덱스 (0-3)
     var selectedSpriteIndex: Int {
         didSet { autoSave() }
@@ -49,7 +44,6 @@ final class PreferencesViewModel {
     init(navigate: ((NavigationDestination) -> Void)? = nil) {
         let defaults = PreferencesData.default
         self.displayMode = defaults.displayMode
-        self.countdownStyle = defaults.countdownStyle
         self.selectedSpriteIndex = defaults.selectedSpriteIndex
         self.navigate = navigate
 
@@ -72,8 +66,6 @@ final class PreferencesViewModel {
         let manager = UserDefaultsManager.shared
         displayMode = manager.displayMode
         selectedSpriteIndex = manager.selectedSpriteIndex
-        // Note: countdownStyle uses local state; UserDefaultsManager may not have
-        // this property yet. Falls back to default if unavailable.
     }
 
     /// Saves the current preferences to UserDefaultsManager immediately.
@@ -82,7 +74,6 @@ final class PreferencesViewModel {
         let manager = UserDefaultsManager.shared
         manager.displayMode = displayMode
         manager.selectedSpriteIndex = selectedSpriteIndex
-        // Note: countdownStyle will be persisted once UserDefaultsManager adds support.
     }
 
     /// Selects a sprite at the given index.

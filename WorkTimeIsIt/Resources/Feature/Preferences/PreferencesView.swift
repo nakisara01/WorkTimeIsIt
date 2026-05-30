@@ -26,9 +26,6 @@ struct PreferencesView: View {
                     // MARK: - Display Mode Section
                     displayModeSection
 
-                    // MARK: - Countdown Style Section
-                    countdownStyleSection
-
                     // MARK: - Sprite Selection Section
                     spriteSelectionSection
                 }
@@ -160,32 +157,6 @@ struct PreferencesView: View {
         .animation(.easeInOut(duration: 0.2), value: isSelected)
     }
 
-    // MARK: - Countdown Style Section
-
-    private var countdownStyleSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            HStack(spacing: AppSpacing.sm) {
-                Image(systemName: "textformat.123")
-                    .font(AppFonts.caption())
-                    .foregroundColor(AppColors.accent)
-                Text("Countdown 표시")
-                    .font(AppFonts.body())
-                    .fontWeight(.medium)
-                    .foregroundColor(AppColors.primaryText)
-            }
-
-            ToggleRow(
-                label: "상세 표시",
-                description: "초 단위까지 표시합니다",
-                isOn: $viewModel.countdownStyle
-            )
-        }
-        .padding(AppSpacing.lg)
-        .background(
-            RoundedRectangle(cornerRadius: AppSpacing.cornerRadiusLarge)
-                .fill(AppColors.cardBackground)
-        )
-    }
 
     // MARK: - Sprite Selection Section
 
