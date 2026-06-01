@@ -7,9 +7,6 @@
     "🎉" : {
 
     },
-    "88:88:88" : {
-
-    },
     "app.displayName" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -73,7 +70,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🎵 Clock Out"
+            "value" : "지금 퇴근하기"
           }
         }
       }
@@ -949,12 +946,6 @@
 
     },
     "앱 종료" : {
-
-    },
-    "캐릭터" : {
-
-    },
-    "표시 모드" : {
 
     }
   },

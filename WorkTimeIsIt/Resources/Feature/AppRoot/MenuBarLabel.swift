@@ -33,7 +33,7 @@ struct MenuBarLabel: View {
     private let fps: Double = 8.0
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 0) {
             spriteIcon
             fixedWidthTimeText
         }
@@ -97,7 +97,7 @@ struct MenuBarLabel: View {
         Text(displayText)
             .font(.system(size: 13, weight: .regular, design: .monospaced))
             .lineLimit(1)
-            .frame(width: 96, alignment: .center)
+            .frame(width: 60, alignment: .leading)
     }
 
     /// Formats the remaining seconds as "H:MM:SS".
