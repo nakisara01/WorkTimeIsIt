@@ -33,9 +33,9 @@ struct MenuBarLabel: View {
     private let fps: Double = 8.0
 
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 8) {
             spriteIcon
-            Text(displayText)
+            fixedWidthTimeText
         }
         .onAppear {
             startAnimation()
@@ -90,6 +90,14 @@ struct MenuBarLabel: View {
         case .endTime:
             return formattedEndTime
         }
+    }
+    
+    /// 숫자 폭 변화로 메뉴바 아이콘이 흔들리지 않도록 고정 너비 텍스트를 사용합니다.
+    private var fixedWidthTimeText: some View {
+        Text(displayText)
+            .font(.system(size: 13, weight: .regular, design: .monospaced))
+            .lineLimit(1)
+            .frame(width: 96, alignment: .center)
     }
 
     /// Formats the remaining seconds as "H:MM:SS".
