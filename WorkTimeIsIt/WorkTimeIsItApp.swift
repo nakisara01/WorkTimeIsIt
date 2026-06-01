@@ -29,6 +29,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusItem()
         setupPopover()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleUserDefaultsChanged),
+            name: UserDefaults.didChangeNotification,
+            object: nil
+        )
     }
 
     private func setupStatusItem() {
@@ -92,7 +98,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func showContextMenu(from button: NSStatusBarButton) {
         let menu = NSMenu()
 
-        let displayModeMenuItem = NSMenuItem(title: "표시 모드", action: nil, keyEquivalent: "")
+        let displayModeMenuItem = NSMenuItem(
+            title: String(localized: "preferences.displayMode.title"),
+            action: nil,
+            keyEquivalent: ""
+        )
         let displayModeSubmenu = NSMenu()
 
         let remainingItem = NSMenuItem(
@@ -116,7 +126,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.setSubmenu(displayModeSubmenu, for: displayModeMenuItem)
         menu.addItem(displayModeMenuItem)
 
-        let spriteMenuItem = NSMenuItem(title: "캐릭터", action: nil, keyEquivalent: "")
+        let spriteMenuItem = NSMenuItem(
+            title: String(localized: "preferences.icon.title"),
+            action: nil,
+            keyEquivalent: ""
+        )
         let spriteSubmenu = NSMenu()
 
         let spriteOptions: [(index: Int, name: String)] = [
@@ -142,7 +156,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(spriteMenuItem)
 
         menu.addItem(.separator())
-        let quitItem = NSMenuItem(title: "앱 종료", action: #selector(quitApp), keyEquivalent: "")
+        let quitItem = NSMenuItem(
+            title: String(localized: "앱 종료"),
+            action: #selector(quitApp),
+            keyEquivalent: ""
+        )
         quitItem.target = self
         menu.addItem(quitItem)
 
@@ -169,6 +187,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     private func quitApp() {
         NSApplication.shared.terminate(nil)
+    }
+
+    @objc
+    private func handleUserDefaultsChanged() {
+        updateStatusItemLayout()
+    }
+
+    private func updateStatusItemLayout() {
+        guard let item = statusItem,
+              let button = item.button,
+              let host = labelHostingView
+        else { return }
+
+        let fitting = host.fittingSize
+        item.length = fitting.width
+        host.frame.size = fitting
+        host.frame.origin = NSPoint(
+            x: (button.bounds.width - fitting.width) / 2,
+            y: (button.bounds.height - fitting.height) / 2
+        )
     }
 }
 
