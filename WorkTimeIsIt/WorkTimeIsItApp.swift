@@ -150,6 +150,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(spriteMenuItem)
 
         menu.addItem(.separator())
+        let restartItem = NSMenuItem(
+            title: String(localized: "앱 재시작"),
+            action: #selector(restartApp),
+            keyEquivalent: ""
+        )
+        restartItem.target = self
+        menu.addItem(restartItem)
+
         let quitItem = NSMenuItem(
             title: String(localized: "앱 종료"),
             action: #selector(quitApp),
@@ -183,6 +191,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     private func quitApp() {
         NSApplication.shared.terminate(nil)
+    }
+
+    @objc
+    private func restartApp() {
+        guard let bundleURL = Bundle.main.bundleURL as URL? else { return }
+        NSWorkspace.shared.openApplication(at: bundleURL, configuration: NSWorkspace.OpenConfiguration()) { _, _ in
+            NSApplication.shared.terminate(nil)
+        }
     }
 
     private func updateStatusItemLayout() {

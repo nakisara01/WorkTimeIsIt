@@ -33,7 +33,7 @@ struct PreferencesView: View {
                 .padding(.vertical, AppSpacing.md)
             }
         }
-        .frame(width: 320)
+        .frame(width: 320, height: 500)
         .background(AppColors.background)
     }
 

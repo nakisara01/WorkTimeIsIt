@@ -45,7 +45,7 @@ struct TimeSettingsView: View {
                 .padding(.vertical, AppSpacing.md)
             }
         }
-        .frame(width: 320)
+        .frame(width: 320, height: 620)
         .background(AppColors.background)
     }
 
@@ -238,6 +238,7 @@ struct TimeSettingsView: View {
             }
         }
         .padding(AppSpacing.lg)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: AppSpacing.cornerRadiusLarge)
                 .fill(AppColors.cardBackground)

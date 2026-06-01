@@ -87,7 +87,7 @@ final class DashboardViewModel {
     var statusLabel: String {
         if isCompleted {
             return String(localized: "dashboard.status.completed")
-        } else if isWorking {
+        } else if isWorking || timeManager.remainingSeconds > 0 {
             return String(localized: "dashboard.status.working")
         } else {
             return String(localized: "dashboard.status.ended")
