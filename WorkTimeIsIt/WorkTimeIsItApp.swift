@@ -46,14 +46,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             settingsManager: deps.settingsManager
         )
         let host = NSHostingView(rootView: labelView)
-        host.translatesAutoresizingMaskIntoConstraints = false
+        host.translatesAutoresizingMaskIntoConstraints = true
+        let fitting = host.fittingSize
+        host.frame = NSRect(origin: .zero, size: fitting)
+        item.length = fitting.width
         button.addSubview(host)
-        NSLayoutConstraint.activate([
-            host.leadingAnchor.constraint(equalTo: button.leadingAnchor),
-            host.trailingAnchor.constraint(equalTo: button.trailingAnchor),
-            host.topAnchor.constraint(equalTo: button.topAnchor),
-            host.bottomAnchor.constraint(equalTo: button.bottomAnchor)
-        ])
+        host.autoresizingMask = []
+        host.frame.origin = NSPoint(
+            x: (button.bounds.width - fitting.width) / 2,
+            y: (button.bounds.height - fitting.height) / 2
+        )
         labelHostingView = host
     }
 
