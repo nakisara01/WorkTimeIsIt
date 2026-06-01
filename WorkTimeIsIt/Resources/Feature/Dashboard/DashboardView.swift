@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 // MARK: - Design Tokens
 
@@ -311,9 +312,14 @@ struct DashboardView: View {
 
             Spacer()
 
-            Text(viewModel.appVersion)
-                .font(.system(size: 12, weight: .regular))
-                .foregroundStyle(DashboardColors.secondaryText)
+            Button {
+                NSApplication.shared.terminate(nil)
+            } label: {
+                Text("앱 종료")
+                    .font(.system(size: 12, weight: .regular))
+                    .foregroundStyle(DashboardColors.secondaryText)
+            }
+            .buttonStyle(.plain)
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 14)
