@@ -103,7 +103,7 @@ struct MenuBarLabel: View {
     private var fixedWidthForDisplayMode: CGFloat {
         switch settingsManager.displayMode {
         case .remainingTime:
-            return 60
+            return 66
         case .endTime:
             return 42
         }

@@ -29,12 +29,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusItem()
         setupPopover()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleUserDefaultsChanged),
-            name: UserDefaults.didChangeNotification,
-            object: nil
-        )
     }
 
     private func setupStatusItem() {
@@ -172,11 +166,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     private func selectDisplayModeRemaining() {
         deps.settingsManager.displayMode = .remainingTime
+        updateStatusItemLayout()
     }
 
     @objc
     private func selectDisplayModeEndTime() {
         deps.settingsManager.displayMode = .endTime
+        updateStatusItemLayout()
     }
 
     @objc
@@ -187,11 +183,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     private func quitApp() {
         NSApplication.shared.terminate(nil)
-    }
-
-    @objc
-    private func handleUserDefaultsChanged() {
-        updateStatusItemLayout()
     }
 
     private func updateStatusItemLayout() {
