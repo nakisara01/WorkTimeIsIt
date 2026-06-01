@@ -109,9 +109,6 @@ final class DashboardViewModel {
 
     /// Called when the Clock Out button is tapped
     func clockOut() {
-        // TODO: Trigger clock-out notification / action
-        #if DEBUG
-        print("[Dashboard] Clock Out tapped")
-        #endif
+        timeManager.clockOutNow()
     }
 }

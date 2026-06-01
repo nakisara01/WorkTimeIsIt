@@ -119,6 +119,17 @@ final class TimeManager {
         timer = nil
     }
     
+    /// 즉시 퇴근 처리하고 타이머를 멈춥니다.
+    func clockOutNow() {
+        stopTimer()
+        endTime = Date()
+        remainingSeconds = 0
+        remainingTimeString = "00:00:00"
+        progress = 1.0
+        isWorking = false
+        isCompleted = true
+    }
+    
     /// 설정을 다시 로드하고 타이머를 재시작합니다.
     func reloadSettings() {
         loadSettings()
